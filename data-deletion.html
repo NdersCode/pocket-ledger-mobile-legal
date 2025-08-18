@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Request deletion of your My Pocket Ledger account and personal data - GDPR and CCPA compliant data deletion process">
+    <meta name="keywords" content="My Pocket Ledger, data deletion, GDPR, CCPA, account deletion, privacy rights">
+    <meta name="author" content="Nders Studio">
+    <meta name="robots" content="index, follow">
+    
+    <title>Data Deletion Request | My Pocket Ledger</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iOCIgZmlsbD0iIzY2NjZGRiIvPgo8cGF0aCBkPSJNMTIgMTBIMjBWMTJIMTJWMTBaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTIgMTRIMjBWMTZIMTJWMTRaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTIgMThIMThWMjBIMTJWMThaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTIgMjJIMTZWMjRIMTJWMjJaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K">
+    
+    <style>
+        /* Include the same base styles from index.html */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #6366F1;
+            --primary-dark: #4F46E5;
+            --secondary-color: #F8FAFC;
+            --text-primary: #1F2937;
+            --text-secondary: #6B7280;
+            --text-light: #9CA3AF;
+            --border-color: #E5E7EB;
+            --success-color: #10B981;
+            --warning-color: #F59E0B;
+            --error-color: #EF4444;
+            --white: #FFFFFF;
+            --gradient-start: #6366F1;
+            --gradient-end: #8B5CF6;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--secondary-color);
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        .nav {
+            background: var(--white);
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .nav-logo-img {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            margin-right: 0.75rem;
+        }
+
+        .nav-title {
+            font-size: 1.125rem;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: background-color 0.2s ease;
+        }
+
+        .back-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* Main content */
+        .main-content {
+            padding: 3rem 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .document-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+        }
+
+        .document-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--error-color), #DC2626);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: var(--white);
+        }
+
+        .document-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .effective-date {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .document-summary p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+
+        /* Content sections */
+        .deletion-content {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .deletion-content h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .deletion-content h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .deletion-content p {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+
+        .deletion-content ul, .deletion-content ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .deletion-content li {
+            margin-bottom: 0.5rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(139, 92, 246, 0.05));
+            border: 1px solid var(--primary-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .highlight-box h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .warning-box {
+            background: rgba(239, 68, 68, 0.05);
+            border: 1px solid var(--error-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .warning-box h3 {
+            color: var(--error-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Contact form */
+        .contact-section {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: var(--white);
+            padding: 3rem 2rem;
+            border-radius: 16px;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .contact-section h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .contact-section p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .contact-email {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--white);
+            color: var(--primary-color);
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .contact-email:hover {
+            transform: translateY(-2px);
+        }
+
+        .required-info {
+            background: var(--secondary-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .required-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-primary);
+            color: var(--white);
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .footer p {
+            margin-bottom: 0.5rem;
+            opacity: 0.8;
+        }
+
+        .footer a {
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .document-header {
+                padding: 1.5rem;
+            }
+
+            .deletion-content {
+                padding: 1.5rem;
+            }
+
+            .contact-section {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --secondary-color: #111827;
+                --text-primary: #F9FAFB;
+                --text-secondary: #D1D5DB;
+                --text-light: #9CA3AF;
+                --border-color: #374151;
+                --white: #1F2937;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .nav,
+            .back-btn {
+                display: none !important;
+            }
+            
+            .deletion-content {
+                box-shadow: none !important;
+                border: 1px solid #ccc !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="index.html" class="nav-logo">
+                <img src="logo.png" alt="My Pocket Ledger Logo" class="nav-logo-img">
+                <span class="nav-title">My Pocket Ledger Legal</span>
+            </a>
+            <a href="index.html" class="back-btn">
+                <span>←</span>
+                <span>Back to Legal Home</span>
+            </a>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="container">
+            <!-- Document Header -->
+            <header class="document-header">
+                <div class="document-icon">🗑️</div>
+                <h1>Data Deletion Request</h1>
+                <div class="effective-date">
+                    <strong>Available 24/7</strong> | <strong>Response within 72 hours</strong>
+                </div>
+                <div class="document-summary">
+                    <p>Request the complete deletion of your My Pocket Ledger account and all associated personal data. We respect your privacy rights and will process your request in compliance with GDPR, CCPA, and other applicable privacy laws.</p>
+                </div>
+            </header>
+
+            <!-- What Gets Deleted Section -->
+            <section class="deletion-content">
+                <h2>📋 What Data Will Be Deleted</h2>
+                <p>When you request account deletion, we will permanently remove:</p>
+                <ul>
+                    <li><strong>Account Information:</strong> Email address, profile settings, preferences</li>
+                    <li><strong>Financial Data:</strong> All transactions, budgets, categories, and financial records</li>
+                    <li><strong>Usage Data:</strong> App usage analytics, AI interaction history, and activity logs</li>
+                    <li><strong>Subscription Data:</strong> Payment history and subscription status (billing records may be retained for legal compliance)</li>
+                    <li><strong>Local Data:</strong> All data stored locally on your device will be cleared upon app uninstallation</li>
+                </ul>
+
+                <div class="warning-box">
+                    <h3>⚠️ Important Notice</h3>
+                    <p><strong>Data deletion is permanent and irreversible.</strong> Once processed, your account and all associated data cannot be recovered. Please ensure you have exported any data you wish to keep before submitting your deletion request.</p>
+                </div>
+            </section>
+
+            <!-- How to Request Section -->
+            <section class="deletion-content">
+                <h2>📧 How to Request Data Deletion</h2>
+                
+                <div class="highlight-box">
+                    <h3>✉️ Email Us Directly</h3>
+                    <p>Send your deletion request to our support team using the contact method below. Our team will verify your identity and process your request within 72 hours.</p>
+                </div>
+
+                <div class="required-info">
+                    <h3>📝 Required Information</h3>
+                    <p>To process your request efficiently, please include:</p>
+                    <ul>
+                        <li>The email address associated with your My Pocket Ledger account</li>
+                        <li>Your full name (as registered in the app)</li>
+                        <li>Subject line: "Account Deletion Request - [Your Email]"</li>
+                        <li>Brief confirmation that you understand the deletion is permanent</li>
+                    </ul>
+                </div>
+
+                <h3>📋 Processing Timeline</h3>
+                <ol>
+                    <li><strong>Request Received:</strong> We acknowledge your request within 24 hours</li>
+                    <li><strong>Identity Verification:</strong> We may ask for additional verification (24-48 hours)</li>
+                    <li><strong>Data Deletion:</strong> Complete removal from our systems (within 72 hours of verification)</li>
+                    <li><strong>Confirmation:</strong> We send you a final confirmation email</li>
+                </ol>
+
+                <p><strong>Total processing time:</strong> 3-5 business days maximum</p>
+            </section>
+
+            <!-- Contact Section -->
+            <div class="contact-section">
+                <h2>📬 Submit Your Data Deletion Request</h2>
+                <p>Contact our privacy team to request immediate account and data deletion</p>
+                <a href="mailto:support.pocketledger@ndersstudio.com?subject=Account%20Deletion%20Request%20-%20[Your%20Email]&amp;body=Hello%20My%20Pocket%20Ledger%20Support%20Team,%0A%0AI%20am%20requesting%20the%20complete%20deletion%20of%20my%20account%20and%20all%20associated%20data.%0A%0AAccount%20Email:%20[Your%20registered%20email%20address]%0AFull%20Name:%20[Your%20full%20name]%0A%0AI%20understand%20that%20this%20action%20is%20permanent%20and%20irreversible.%20I%20confirm%20that%20I%20want%20to%20proceed%20with%20the%20deletion%20of%20my%20account%20and%20all%20data.%0A%0AThank%20you%20for%20your%20assistance.%0A%0ABest%20regards," class="contact-email">
+                    <span>📧</span>
+                    <span>support.pocketledger@ndersstudio.com</span>
+                </a>
+                <p style="font-size: 0.9rem; margin-top: 1rem; opacity: 0.8;">
+                    Clicking the email link above will open your email client with a pre-filled template
+                </p>
+            </div>
+
+            <!-- Additional Information -->
+            <section class="deletion-content">
+                <h2>ℹ️ Additional Information</h2>
+                
+                <h3>🔒 Privacy &amp; Security</h3>
+                <ul>
+                    <li>All deletion requests are handled with strict confidentiality</li>
+                    <li>We use secure methods to verify your identity before processing</li>
+                    <li>Deletion confirmations are sent only to the registered email address</li>
+                </ul>
+
+                <h3>⚖️ Legal Compliance</h3>
+                <ul>
+                    <li><strong>GDPR (EU):</strong> Right to be forgotten under Article 17</li>
+                    <li><strong>CCPA/CPRA (California):</strong> Right to deletion of personal information</li>
+                    <li><strong>Other Jurisdictions:</strong> Compliance with applicable local privacy laws</li>
+                </ul>
+
+                <h3>📞 Alternative Contact</h3>
+                <p>If you have any questions about the deletion process or need assistance, you can also:</p>
+                <ul>
+                    <li>Review our <a href="privacy-policy.html" style="color: var(--primary-color);">Privacy Policy</a> for more details</li>
+                    <li>Visit our <a href="index.html" style="color: var(--primary-color);">Legal Home Page</a> for other privacy resources</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <h3>🛡️ Data Protection Commitment</h3>
+                    <p>My Pocket Ledger is committed to protecting your privacy and ensuring your data rights. We believe you should have complete control over your personal information, including the right to have it deleted when you no longer wish to use our service.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Nders Studio. All rights reserved.</p>
+            <p>My Pocket Ledger - Personal Finance Management Made Simple</p>
+            <p>Contact: <a href="mailto:support.pocketledger@ndersstudio.com">support.pocketledger@ndersstudio.com</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Basic error handling for email link
+        document.addEventListener('DOMContentLoaded', function() {
+            const emailLink = document.querySelector('.contact-email');
+            
+            emailLink.addEventListener('click', function(e) {
+                // Track deletion request clicks (for analytics if implemented)
+                console.log('Data deletion request initiated');
+                
+                // Show a brief confirmation message
+                const originalText = this.innerHTML;
+                this.innerHTML = '<span>📧</span><span>Email client opening...</span>';
+                
+                setTimeout(() => {
+                    this.innerHTML = originalText;
+                }, 2000);
+            });
+        });
+
+        // Basic performance monitoring
+        window.addEventListener('load', function() {
+            const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
+            console.log(`Data deletion page load time: ${loadTime}ms`);
+        });
+    </script>
+</body>
+</html>
