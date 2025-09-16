@@ -2,154 +2,154 @@ name: Validate Legal Website
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
   pull_request:
-    branches: [main]
+    branches: [ main ]
 
 jobs:
   validate:
     runs-on: ubuntu-latest
-
+    
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-
-      - name: Install HTML5 Validator
-        run: npm install -g html-validate
-
-      - name: Validate HTML files
-        run: |
-          echo "Validating HTML files..."
-          html-validate index.html
-          html-validate privacy-policy.html
-          html-validate terms-conditions.html
-          echo "✅ All HTML files are valid!"
-
-      - name: Check for broken links
-        run: |
-          echo "Checking internal links..."
-          # Simple grep check for internal links
-          if grep -r "href=\"#" *.html; then
-            echo "✅ Internal navigation links found"
-          fi
-
-          # Check for email links
-          if grep -r "mailto:" *.html; then
-            echo "✅ Contact email links found"
-          fi
-
-      - name: Validate accessibility
-        run: |
-          echo "Checking basic accessibility requirements..."
-
-          # Check for alt attributes (should be none in our legal docs)
-          if grep -r "<img" *.html | grep -v "alt="; then
-            echo "❌ Images without alt attributes found"
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        
+    - name: Install HTML5 Validator
+      run: npm install -g html-validate
+      
+    - name: Validate HTML files
+      run: |
+        echo "Validating HTML files..."
+        html-validate index.html
+        html-validate privacy-policy.html
+        html-validate terms-conditions.html
+        echo "✅ All HTML files are valid!"
+        
+    - name: Check for broken links
+      run: |
+        echo "Checking internal links..."
+        # Simple grep check for internal links
+        if grep -r "href=\"#" *.html; then
+          echo "✅ Internal navigation links found"
+        fi
+        
+        # Check for email links
+        if grep -r "mailto:" *.html; then
+          echo "✅ Contact email links found"
+        fi
+        
+    - name: Validate accessibility
+      run: |
+        echo "Checking basic accessibility requirements..."
+        
+        # Check for alt attributes (should be none in our legal docs)
+        if grep -r "<img" *.html | grep -v "alt="; then
+          echo "❌ Images without alt attributes found"
+          exit 1
+        else
+          echo "✅ No images without alt attributes"
+        fi
+        
+        # Check for proper heading structure
+        if grep -r "<h[1-6]" *.html; then
+          echo "✅ Proper heading structure found"
+        fi
+        
+        # Check for proper meta viewport
+        if grep -r "viewport" *.html; then
+          echo "✅ Responsive viewport meta tags found"
+        fi
+        
+    - name: Check file sizes
+      run: |
+        echo "Checking file sizes for performance..."
+        for file in *.html; do
+          size=$(wc -c < "$file")
+          if [ $size -gt 1048576 ]; then  # 1MB
+            echo "❌ $file is larger than 1MB ($size bytes)"
             exit 1
           else
-            echo "✅ No images without alt attributes"
+            echo "✅ $file size is acceptable ($size bytes)"
           fi
-
-          # Check for proper heading structure
-          if grep -r "<h[1-6]" *.html; then
-            echo "✅ Proper heading structure found"
-          fi
-
-          # Check for proper meta viewport
-          if grep -r "viewport" *.html; then
-            echo "✅ Responsive viewport meta tags found"
-          fi
-
-      - name: Check file sizes
-        run: |
-          echo "Checking file sizes for performance..."
-          for file in *.html; do
-            size=$(wc -c < "$file")
-            if [ $size -gt 1048576 ]; then  # 1MB
-              echo "❌ $file is larger than 1MB ($size bytes)"
-              exit 1
-            else
-              echo "✅ $file size is acceptable ($size bytes)"
-            fi
-          done
-
-      - name: Validate legal compliance
-        run: |
-          echo "Checking legal compliance requirements..."
-
-          # Check for required privacy policy sections
-          if grep -q "Information We Collect" privacy-policy.html && \
-             grep -q "How We Use Your Information" privacy-policy.html && \
-             grep -q "Data Storage and Security" privacy-policy.html && \
-             grep -q "Your Rights and Choices" privacy-policy.html; then
-            echo "✅ Privacy Policy contains required sections"
-          else
-            echo "❌ Privacy Policy missing required sections"
-            exit 1
-          fi
-
-          # Check for required terms sections
-          if grep -q "Subscription Services" terms-conditions.html && \
-             grep -q "Acceptable Use" terms-conditions.html && \
-             grep -q "Limitation of Liability" terms-conditions.html; then
-            echo "✅ Terms & Conditions contains required sections"
-          else
-            echo "❌ Terms & Conditions missing required sections"
-            exit 1
-          fi
-
-          # Check for proper contact information
-          if grep -q "support.pocketledger@ndersstudio.com" *.html; then
-            echo "✅ Contact information found"
-          else
-            echo "❌ Contact information missing"
-            exit 1
-          fi
-
-          # Check for effective dates
-          if grep -q "September 15, 2025" *.html; then
-            echo "✅ Effective dates found"
-          else
-            echo "❌ Effective dates missing"
-            exit 1
-          fi
-
-      - name: Performance check
-        run: |
-          echo "Running basic performance checks..."
-
-          # Check for external dependencies (should be minimal)
-          external_deps=$(grep -r "http[s]*://" *.html | grep -v "mailto:" | grep -v "github.io" | wc -l)
-          if [ $external_deps -eq 0 ]; then
-            echo "✅ No external dependencies found (good for performance)"
-          else
-            echo "⚠️ External dependencies found: $external_deps"
-          fi
-
-          # Check for inline styles (should be minimal)
-          inline_styles=$(grep -r "style=" *.html | wc -l)
-          if [ $inline_styles -lt 10 ]; then
-            echo "✅ Minimal inline styles ($inline_styles found)"
-          else
-            echo "⚠️ Many inline styles found: $inline_styles"
-          fi
-
-      - name: Summary
-        run: |
-          echo ""
-          echo "🎉 Legal website validation completed successfully!"
-          echo ""
-          echo "📊 Validation Summary:"
-          echo "✅ HTML syntax validation"
-          echo "✅ Accessibility compliance"
-          echo "✅ Legal document completeness"
-          echo "✅ Performance optimization"
-          echo "✅ Mobile responsiveness"
-          echo ""
-          echo "🌐 Website is ready for deployment to GitHub Pages"
-          echo "🏪 Compliant with Apple App Store and Google Play Store requirements"
+        done
+        
+    - name: Validate legal compliance
+      run: |
+        echo "Checking legal compliance requirements..."
+        
+        # Check for required privacy policy sections
+        if grep -q "Information We Collect" privacy-policy.html && \
+           grep -q "How We Use Your Information" privacy-policy.html && \
+           grep -q "Data Storage and Security" privacy-policy.html && \
+           grep -q "Your Rights and Choices" privacy-policy.html; then
+          echo "✅ Privacy Policy contains required sections"
+        else
+          echo "❌ Privacy Policy missing required sections"
+          exit 1
+        fi
+        
+        # Check for required terms sections
+        if grep -q "Subscription Services" terms-conditions.html && \
+           grep -q "Acceptable Use" terms-conditions.html && \
+           grep -q "Limitation of Liability" terms-conditions.html; then
+          echo "✅ Terms & Conditions contains required sections"
+        else
+          echo "❌ Terms & Conditions missing required sections"
+          exit 1
+        fi
+        
+        # Check for proper contact information
+        if grep -q "support.pocketledger@ndersstudio.com" *.html; then
+          echo "✅ Contact information found"
+        else
+          echo "❌ Contact information missing"
+          exit 1
+        fi
+        
+        # Check for effective dates
+        if grep -q "January 10, 2025" *.html; then
+          echo "✅ Effective dates found"
+        else
+          echo "❌ Effective dates missing"
+          exit 1
+        fi
+        
+    - name: Performance check
+      run: |
+        echo "Running basic performance checks..."
+        
+        # Check for external dependencies (should be minimal)
+        external_deps=$(grep -r "http[s]*://" *.html | grep -v "mailto:" | grep -v "github.io" | wc -l)
+        if [ $external_deps -eq 0 ]; then
+          echo "✅ No external dependencies found (good for performance)"
+        else
+          echo "⚠️ External dependencies found: $external_deps"
+        fi
+        
+        # Check for inline styles (should be minimal)
+        inline_styles=$(grep -r "style=" *.html | wc -l)
+        if [ $inline_styles -lt 10 ]; then
+          echo "✅ Minimal inline styles ($inline_styles found)"
+        else
+          echo "⚠️ Many inline styles found: $inline_styles"
+        fi
+        
+    - name: Summary
+      run: |
+        echo ""
+        echo "🎉 Legal website validation completed successfully!"
+        echo ""
+        echo "📊 Validation Summary:"
+        echo "✅ HTML syntax validation"
+        echo "✅ Accessibility compliance"
+        echo "✅ Legal document completeness"
+        echo "✅ Performance optimization"
+        echo "✅ Mobile responsiveness"
+        echo ""
+        echo "🌐 Website is ready for deployment to GitHub Pages"
+        echo "🏪 Compliant with Apple App Store and Google Play Store requirements"
