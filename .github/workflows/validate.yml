@@ -112,7 +112,7 @@ jobs:
         fi
         
         # Check for effective dates
-        if grep -q "January 10, 2025" *.html; then
+        if grep -q "September 15, 2025" *.html; then
           echo "✅ Effective dates found"
         else
           echo "❌ Effective dates missing"
